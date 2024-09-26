@@ -17,6 +17,8 @@
 		F4927E0F2CA5FE81009D1E46 /* banquemisr_challenge05__Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4927E0E2CA5FE81009D1E46 /* banquemisr_challenge05__Tests.swift */; };
 		F4927E192CA5FE81009D1E46 /* banquemisr_challenge05__UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4927E182CA5FE81009D1E46 /* banquemisr_challenge05__UITests.swift */; };
 		F4927E1B2CA5FE81009D1E46 /* banquemisr_challenge05__UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4927E1A2CA5FE81009D1E46 /* banquemisr_challenge05__UITestsLaunchTests.swift */; };
+		F4927E292CA5FEFC009D1E46 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4927E282CA5FEFC009D1E46 /* NetworkManager.swift */; };
+		F4927E2C2CA602C2009D1E46 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4927E2B2CA602C2009D1E46 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		F4927E142CA5FE81009D1E46 /* banquemisr.challenge05.*UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "banquemisr.challenge05.*UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4927E182CA5FE81009D1E46 /* banquemisr_challenge05__UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = banquemisr_challenge05__UITests.swift; sourceTree = "<group>"; };
 		F4927E1A2CA5FE81009D1E46 /* banquemisr_challenge05__UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = banquemisr_challenge05__UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F4927E282CA5FEFC009D1E46 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		F4927E2B2CA602C2009D1E46 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +105,8 @@
 		F4927DF32CA5FE80009D1E46 /* banquemisr.challenge05.* */ = {
 			isa = PBXGroup;
 			children = (
+				F4927E2A2CA602B0009D1E46 /* Models */,
+				F4927E272CA5FED5009D1E46 /* Network */,
 				F4927DF42CA5FE80009D1E46 /* AppDelegate.swift */,
 				F4927DF62CA5FE80009D1E46 /* SceneDelegate.swift */,
 				F4927DF82CA5FE80009D1E46 /* ViewController.swift */,
@@ -128,6 +134,22 @@
 				F4927E1A2CA5FE81009D1E46 /* banquemisr_challenge05__UITestsLaunchTests.swift */,
 			);
 			path = "banquemisr.challenge05.*UITests";
+			sourceTree = "<group>";
+		};
+		F4927E272CA5FED5009D1E46 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F4927E282CA5FEFC009D1E46 /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		F4927E2A2CA602B0009D1E46 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F4927E2B2CA602C2009D1E46 /* Movie.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +285,8 @@
 			files = (
 				F4927DF92CA5FE80009D1E46 /* ViewController.swift in Sources */,
 				F4927DFF2CA5FE80009D1E46 /* banquemisr_challenge05__.xcdatamodeld in Sources */,
+				F4927E2C2CA602C2009D1E46 /* Movie.swift in Sources */,
+				F4927E292CA5FEFC009D1E46 /* NetworkManager.swift in Sources */,
 				F4927DF52CA5FE80009D1E46 /* AppDelegate.swift in Sources */,
 				F4927DF72CA5FE80009D1E46 /* SceneDelegate.swift in Sources */,
 			);
@@ -446,6 +470,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHWQF7TL3L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "banquemisr.challenge05.*/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -473,6 +498,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHWQF7TL3L;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "banquemisr.challenge05.*/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

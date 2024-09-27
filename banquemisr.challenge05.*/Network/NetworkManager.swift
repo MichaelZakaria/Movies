@@ -16,7 +16,7 @@ enum EndPoints {
     case popular
     case upcoming
     case movieDetail(id:Int)
-    var value: String {
+    var rawValue: String {
         switch self {
         case .nowPlaying:
             return "now_playing"
@@ -33,7 +33,7 @@ enum EndPoints {
 class NetworkManager: NetworkManagerProtocol{
     func getData<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void) {
         // 1
-        let url = URL(string: "https://api.themoviedb.org/3/movie/\(endPoint.value)")
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(endPoint.rawValue)")
        
         // 2
         var request = URLRequest(url: url!)

@@ -70,11 +70,17 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         viewModel?.loadMoviePoster(posterPath: viewModel?.movies[indexPath.row].posterPath ?? "", handler: { data in
             cell.moviePoster.image = UIImage(data: data)
         })
-        
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 172
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let movieDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "movieDetails") as! MovieDetailsTableViewController
+        movieDetailsVC.id = viewModel?.movies[indexPath.row].id
+        movieDetailsVC.poster = (moviesTable.cellForRow(at: indexPath) as! MovieTableViewCell).moviePoster.image
+        navigationController?.pushViewController(movieDetailsVC, animated: true)
     }
 }

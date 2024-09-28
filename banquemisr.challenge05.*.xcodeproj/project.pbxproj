@@ -22,6 +22,8 @@
 		F4DF6CD12CA6E71100DE5214 /* MovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4DF6CCF2CA6E71100DE5214 /* MovieTableViewCell.xib */; };
 		F4DF6CD42CA71E6500DE5214 /* CustomViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CD32CA71E6500DE5214 /* CustomViews.swift */; };
 		F4DF6CD82CA7210E00DE5214 /* ListScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CD72CA7210E00DE5214 /* ListScreenViewModel.swift */; };
+		F4DF6CDF2CA7692100DE5214 /* MovieDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CDE2CA7692100DE5214 /* MovieDetailsTableViewController.swift */; };
+		F4DF6CE12CA81DF400DE5214 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CE02CA81DF400DE5214 /* MovieDetailsViewModel.swift */; };
 		F4FB52D32CA6DD1D00AC43F8 /* ListScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB52D22CA6DD1D00AC43F8 /* ListScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +64,8 @@
 		F4DF6CCF2CA6E71100DE5214 /* MovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieTableViewCell.xib; sourceTree = "<group>"; };
 		F4DF6CD32CA71E6500DE5214 /* CustomViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViews.swift; sourceTree = "<group>"; };
 		F4DF6CD72CA7210E00DE5214 /* ListScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenViewModel.swift; sourceTree = "<group>"; };
+		F4DF6CDE2CA7692100DE5214 /* MovieDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsTableViewController.swift; sourceTree = "<group>"; };
+		F4DF6CE02CA81DF400DE5214 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		F4FB52D22CA6DD1D00AC43F8 /* ListScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -177,9 +181,35 @@
 			path = movieCell;
 			sourceTree = "<group>";
 		};
+		F4DF6CD92CA73E1700DE5214 /* DetailScreen */ = {
+			isa = PBXGroup;
+			children = (
+				F4DF6CDB2CA73E7100DE5214 /* viewModel */,
+				F4DF6CDA2CA73E6500DE5214 /* view */,
+			);
+			path = DetailScreen;
+			sourceTree = "<group>";
+		};
+		F4DF6CDA2CA73E6500DE5214 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F4DF6CDE2CA7692100DE5214 /* MovieDetailsTableViewController.swift */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
+		F4DF6CDB2CA73E7100DE5214 /* viewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F4DF6CE02CA81DF400DE5214 /* MovieDetailsViewModel.swift */,
+			);
+			path = viewModel;
+			sourceTree = "<group>";
+		};
 		F4FB52CE2CA6DCC100AC43F8 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F4DF6CD92CA73E1700DE5214 /* DetailScreen */,
 				F4FB52CF2CA6DCD000AC43F8 /* ListScreen */,
 			);
 			path = Modules;
@@ -349,8 +379,10 @@
 				F4927DFF2CA5FE80009D1E46 /* banquemisr_challenge05__.xcdatamodeld in Sources */,
 				F4FB52D32CA6DD1D00AC43F8 /* ListScreenViewController.swift in Sources */,
 				F4927E2C2CA602C2009D1E46 /* Movie.swift in Sources */,
+				F4DF6CE12CA81DF400DE5214 /* MovieDetailsViewModel.swift in Sources */,
 				F4927E292CA5FEFC009D1E46 /* NetworkManager.swift in Sources */,
 				F4927DF52CA5FE80009D1E46 /* AppDelegate.swift in Sources */,
+				F4DF6CDF2CA7692100DE5214 /* MovieDetailsTableViewController.swift in Sources */,
 				F4DF6CD02CA6E71100DE5214 /* MovieTableViewCell.swift in Sources */,
 				F4927DF72CA5FE80009D1E46 /* SceneDelegate.swift in Sources */,
 			);

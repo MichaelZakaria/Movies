@@ -13,11 +13,7 @@ class ListScreenViewModel {
     
     var bindResultToViewController: (() -> Void) = {}
     
-    var movies: [Movie] = [] {
-        didSet {
-            bindResultToViewController()
-        }
-    }
+    var movies: [Movie] = []
     
     var playnig: [Movie] = []
     var popular: [Movie] = []
@@ -44,6 +40,7 @@ class ListScreenViewModel {
                     }
                     print("\(endpoint): \(moviesResponse.results.first?.title ?? "not found")")
                     self.movies = moviesResponse.results
+                    self.bindResultToViewController()
                 }
             case .failure(let error):
                 print(error.localizedDescription)

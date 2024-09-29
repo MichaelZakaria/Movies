@@ -15,16 +15,16 @@ class ListScreenViewModel {
     
     var movies: [Movie] = []
     
-    var playnig: [Movie] = []
-    var popular: [Movie] = []
-    var upcoming: [Movie] = []
+    var playnig: [Movie]?
+    var popular: [Movie]?
+    var upcoming: [Movie]? 
     
     init() {
         self.network = NetworkManager()
     }
     
     func loadMovies(endpoint: EndPoints) {
-        network.getData(endPoint: endpoint, type: MoviesResponse.self) { result in
+        network.fetchMovies(endPoint: endpoint, type: MoviesResponse.self) { result in
             switch result {
             case .success(let moviesResponse):
                 DispatchQueue.main.async {
@@ -38,12 +38,12 @@ class ListScreenViewModel {
                     default:
                         return
                     }
-                    print("\(endpoint): \(moviesResponse.results.first?.title ?? "not found")")
+                    //print("\(endpoint): \(moviesResponse.results.first?.title ?? "not found")")
                     self.movies = moviesResponse.results
                     self.bindResultToViewController(nil)
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                //print(error.localizedDescription)
                 DispatchQueue.main.async {
                     self.bindResultToViewController(error)
                 }
@@ -59,11 +59,8 @@ class ListScreenViewModel {
                 print(error)
                 return
             }
-            
             guard let data = data else {return}
-            
-            print("done")
-            
+            //print("done")
             DispatchQueue.main.async {
                 handler(data)
             }

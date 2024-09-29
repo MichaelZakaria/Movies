@@ -24,10 +24,10 @@ class MovieDetailsViewModel{
     }
     
     func fetchMovieDetails(id: Int) {
-        network.getData(endPoint: .movieDetail(id: id), type: Movie.self) { result in
+        network.fetchMovies(endPoint: .movieDetail(id: id), type: Movie.self) { result in
             switch result {
             case .success(let movie):
-                print("ok")
+                //print("ok")
                 DispatchQueue.main.async {
                     self.movie = movie
                 }

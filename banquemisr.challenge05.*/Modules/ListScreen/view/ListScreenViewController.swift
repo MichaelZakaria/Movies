@@ -9,12 +9,13 @@ import UIKit
 
 class ListScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var notFoundLabel: UILabel!
     @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var moviesTable: UITableView!
     
-    var viewModel: ListScreenViewModel?
-    
     var activityIndicator: UIActivityIndicatorView!
+    
+    var viewModel: ListScreenViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,13 +23,15 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         self.moviesTable.delegate = self
         self.moviesTable.dataSource = self
         
-        setActivityIndicator()
-        
-        let movieCellNib = UINib(nibName: "MovieTableViewCell", bundle: nil)
-        moviesTable.register(movieCellNib, forCellReuseIdentifier: "movieCell")
-        
+        setupActivityIndicator()
+        registerMovieTableViewCell()
         setViewModel()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadMovies()
+    }
+    
     @IBAction func refreshButtonAction(_ sender: Any) {
         loadMovies()
     }
@@ -36,22 +39,33 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func setViewModel() {
         viewModel = ListScreenViewModel()
         viewModel?.bindResultToViewController = { error in
+            
             self.activityIndicator.stopAnimating()
             self.refreshButton.isHidden = true
+            self.notFoundLabel.isHidden = true
+            
             if let error = error {
                 self.showAlert(title: "⚠️", message: error.localizedDescription)
             } else {
-                self.moviesTable.reloadData()
+                if self.viewModel?.movies.count ?? 0 > 0 {
+                    self.moviesTable.reloadData()
+                } else {
+                    self.notFoundLabel.isHidden = false
+                }
             }
         }
     }
     
-    func setActivityIndicator() {
-        // Initialize the activity indicator
+    func registerMovieTableViewCell() {
+        let movieCellNib = UINib(nibName: "MovieTableViewCell", bundle: nil)
+        moviesTable.register(movieCellNib, forCellReuseIdentifier: "movieCell")
+    }
+    
+    func setupActivityIndicator() {
         activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.center = view.center // Center the indicator in the view
-        activityIndicator.hidesWhenStopped = true // Hide when not animating
-        // Add the activity indicator to the view
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        
         view.addSubview(activityIndicator)
     }
     
@@ -66,29 +80,25 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         self.present(alert, animated: true)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        loadMovies()
-    }
-    
     func loadMovies() {
         switch self.tabBarItem.tag {
-        case 0:
-            if viewModel?.playnig.count != 0 {
-                viewModel?.movies = viewModel?.playnig ?? []
+        case 0: // Now playing
+            if let playing = viewModel?.playnig {
+                    viewModel?.movies = playing
             } else {
                 activityIndicator.startAnimating()
                 viewModel?.loadMovies(endpoint: .nowPlaying)
             }
-        case 1:
-            if viewModel?.popular.count != 0 {
-                viewModel?.movies = viewModel?.popular ?? []
+        case 1: // Popular
+            if let popular = viewModel?.popular {
+                viewModel?.movies = popular
             } else {
                 activityIndicator.startAnimating()
                 viewModel?.loadMovies(endpoint: .popular)
             }
-        case 2:
-            if viewModel?.upcoming.count != 0 {
-                viewModel?.movies = viewModel?.upcoming ?? []
+        case 2: // Upcoming
+            if let upcoming = viewModel?.upcoming {
+                viewModel?.movies = upcoming
             } else {
                 activityIndicator.startAnimating()
                 viewModel?.loadMovies(endpoint: .upcoming)
@@ -114,9 +124,7 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         } else {
             viewModel?.loadMoviePoster(posterPath: viewModel?.movies[indexPath.row].posterPath ?? "", handler: { data in
                 if let posterImage = UIImage(data: data) {
-                    
                     ImageCache.shared.setObject(posterImage, forKey: (self.viewModel?.movies[indexPath.row].posterPath ?? "") as NSString)
-                    
                     cell.moviePoster.image = posterImage
                 }
             })

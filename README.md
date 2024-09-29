@@ -1,6 +1,6 @@
 # Movies
 
- - Get your daily of all the now playing, popular and upcomig movies :<br>
+ - Get your daily fix of all the now playing, popular and upcomig movies :<br>
 <p align="center">
   <img src="https://github.com/user-attachments/assets/ef5417a5-5526-4a9b-b3d1-0f8f0c5fe8dd" width="400" height="800"/>
 </p>

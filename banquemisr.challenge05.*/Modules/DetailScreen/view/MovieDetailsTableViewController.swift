@@ -15,6 +15,7 @@ class MovieDetailsTableViewController: UITableViewController {
     
     var viewModel: MovieDetailsViewModel?
     
+    @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var minuteLabel: UILabel!
     @IBOutlet weak var movieLanguage: UILabel!
     @IBOutlet weak var movieReleaseDate: UILabel!
@@ -31,8 +32,6 @@ class MovieDetailsTableViewController: UITableViewController {
         
         tableView.contentInset = .init(top: 50, left: 0, bottom: -30, right: 0)
         
-        self.title = name ?? ""
-        
         setActivityIndicator()
         setNavigationBar()
         setbackGroundImage(image: poster!)
@@ -40,15 +39,12 @@ class MovieDetailsTableViewController: UITableViewController {
         setViewModel()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        loadMovie()
+    }
+    
     func setViewModel() {
         viewModel = MovieDetailsViewModel()
-        
-        if viewModel?.movie == nil {
-            activityIndicator.startAnimating()
-            viewModel?.fetchMovieDetails(id: id ?? 0)
-        } else {
-            viewModel?.bindResultToViewController(nil)
-        }
         
         viewModel?.bindResultToViewController = { [weak self] error in
             guard let self = self else { return }
@@ -59,35 +55,47 @@ class MovieDetailsTableViewController: UITableViewController {
                 return
             }
             
-            if viewModel?.movie != nil {
+            if let movie = viewModel?.movie {
                 activityIndicator.stopAnimating()
-                
-                moviePoster.image = poster
-                movieOverview.text = viewModel?.movie?.overview
-                if viewModel?.movie?.runtime == 0 {
-                    movieRuntime.text = "Unknown"
-                    minuteLabel.isHidden = true
-                    minuteLabel.text = .none
-                } else {
-                    movieRuntime.text = viewModel?.movie?.runtime?.description
-                }
-                movieGenres.text = viewModel?.movie?.genres?.reduce("") { (partialResult, genre) in
-                    if self.viewModel?.movie?.genres?.first?.id == genre.id {
-                        return "\(genre.name)"
-                    } else {
-                        return "\(partialResult ?? "") - \(genre.name)"
-                    }
-                }
-                movieScore.text = viewModel?.movie?.voteAverage == 0.0 ? "Not scored yet" : String(format: "%.1f", viewModel?.movie?.voteAverage ?? 0.0)
-                movieLanguage.text = viewModel?.movie?.language
-                movieReleaseDate.text = viewModel?.movie?.releaseDate
-                
+                setMovieDetailsUI(movie: movie)
                 tableView.reloadData()
             } else {
                 showAlert(title: "⚠️", message: "Somethong went wrong please try again")
             }
         }
             
+    }
+    
+    func loadMovie() {
+        if viewModel?.movie == nil {
+            activityIndicator.startAnimating()
+            viewModel?.fetchMovieDetails(id: id ?? 0)
+        } else {
+            viewModel?.bindResultToViewController(nil)
+        }
+    }
+    
+    func setMovieDetailsUI(movie: Movie) {
+        moviePoster.image = poster
+        movieTitle.text = name
+        movieOverview.text = movie.overview
+        if movie.runtime == 0 {
+            movieRuntime.text = "Unknown"
+            minuteLabel.isHidden = true
+            minuteLabel.text = .none
+        } else {
+            movieRuntime.text = movie.runtime?.description
+        }
+        movieGenres.text = movie.genres?.reduce("") { (partialResult, genre) in
+            if movie.genres?.first?.id == genre.id {
+                return "\(genre.name)"
+            } else {
+                return "\(partialResult ?? "") - \(genre.name)"
+            }
+        }
+        movieScore.text = movie.voteAverage == 0.0 ? "Not scored yet" : String(format: "%.1f", movie.voteAverage)
+        movieLanguage.text = movie.language
+        movieReleaseDate.text = movie.releaseDate
     }
     
     func showAlert(title: String, message: String) {
@@ -99,26 +107,23 @@ class MovieDetailsTableViewController: UITableViewController {
     }
     
     func setActivityIndicator() {
-        // Initialize the activity indicator
         activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.center = view.center // Center the indicator in the view
-        activityIndicator.hidesWhenStopped = true // Hide when not animating
-        // Add the activity indicator to the view
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        
         view.addSubview(activityIndicator)
     }
     
     func setNavigationBar() {
+        self.title = name ?? ""
         self.navigationController?.navigationBar.tintColor = UIColor(.black)
-//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: UIBarButtonItem.Style.plain, target: nil, action: nil)
-//        self.navigationController?.navigationBar.backIndicatorImage = UIImage(systemName: "arrowshape.turn.up.backward")
-//        self.navigationController?.navigationBar.backIndicatorTransitionMaskImage = UIImage(systemName: "arrowshape.turn.up.backward")
     }
     
     func setbackGroundImage(image: UIImage) {
         let backgroundImageView = UIImageView()
         let backgroundImage = blurImage(image: image, brightnessAmount: 0.05, radius: 50)
         backgroundImageView.image = backgroundImage
-        backgroundImageView.contentMode = .scaleAspectFill // Adjust as needed
+        backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = true
         // Add the image view to the table view's background
         tableView.backgroundView = backgroundImageView
@@ -160,7 +165,7 @@ class MovieDetailsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return viewModel?.movie != nil ? 7 : 0
+        return viewModel?.movie != nil ? 8 : 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

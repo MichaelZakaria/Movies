@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func getData<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void)
+    func fetchMovies<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void)
 }
 
 enum EndPoints {
@@ -31,7 +31,7 @@ enum EndPoints {
 }
 
 class NetworkManager: NetworkManagerProtocol{
-    func getData<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void) {
+    func fetchMovies<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void) {
         // 1
         let url = URL(string: "https://api.themoviedb.org/3/movie/\(endPoint.rawValue)")
        

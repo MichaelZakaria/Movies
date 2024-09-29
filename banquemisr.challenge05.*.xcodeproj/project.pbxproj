@@ -24,6 +24,7 @@
 		F4DF6CD82CA7210E00DE5214 /* ListScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CD72CA7210E00DE5214 /* ListScreenViewModel.swift */; };
 		F4DF6CDF2CA7692100DE5214 /* MovieDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CDE2CA7692100DE5214 /* MovieDetailsTableViewController.swift */; };
 		F4DF6CE12CA81DF400DE5214 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CE02CA81DF400DE5214 /* MovieDetailsViewModel.swift */; };
+		F4F9064F2CA8A25B00CEA7A0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F9064E2CA8A25A00CEA7A0 /* ImageCache.swift */; };
 		F4FB52D32CA6DD1D00AC43F8 /* ListScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB52D22CA6DD1D00AC43F8 /* ListScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +67,7 @@
 		F4DF6CD72CA7210E00DE5214 /* ListScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenViewModel.swift; sourceTree = "<group>"; };
 		F4DF6CDE2CA7692100DE5214 /* MovieDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsTableViewController.swift; sourceTree = "<group>"; };
 		F4DF6CE02CA81DF400DE5214 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
+		F4F9064E2CA8A25A00CEA7A0 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		F4FB52D22CA6DD1D00AC43F8 /* ListScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				F4927E2B2CA602C2009D1E46 /* Movie.swift */,
+				F4F9064E2CA8A25A00CEA7A0 /* ImageCache.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 			files = (
 				F4DF6CD42CA71E6500DE5214 /* CustomViews.swift in Sources */,
 				F4DF6CD82CA7210E00DE5214 /* ListScreenViewModel.swift in Sources */,
+				F4F9064F2CA8A25B00CEA7A0 /* ImageCache.swift in Sources */,
 				F4927DFF2CA5FE80009D1E46 /* banquemisr_challenge05__.xcdatamodeld in Sources */,
 				F4FB52D32CA6DD1D00AC43F8 /* ListScreenViewController.swift in Sources */,
 				F4927E2C2CA602C2009D1E46 /* Movie.swift in Sources */,

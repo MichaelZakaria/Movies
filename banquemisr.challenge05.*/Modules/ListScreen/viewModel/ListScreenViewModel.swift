@@ -11,7 +11,7 @@ class ListScreenViewModel {
     
     let network: NetworkManagerProtocol
     
-    var bindResultToViewController: (() -> Void) = {}
+    var bindResultToViewController: ((_ error: Error?) -> Void) = {error in }
     
     var movies: [Movie] = []
     
@@ -40,16 +40,18 @@ class ListScreenViewModel {
                     }
                     print("\(endpoint): \(moviesResponse.results.first?.title ?? "not found")")
                     self.movies = moviesResponse.results
-                    self.bindResultToViewController()
+                    self.bindResultToViewController(nil)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.bindResultToViewController(error)
+                }
             }
         }
     }
     
     func loadMoviePoster(posterPath: String, handler: @escaping (_ data: Data) -> Void) {
-        
         let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")!
 
         let imageTask = URLSession.shared.dataTask(with: url) { (data, _, error) in

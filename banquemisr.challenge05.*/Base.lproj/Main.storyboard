@@ -20,10 +20,22 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rgd-hx-Mkz">
+                                <rect key="frame" x="134" y="417" width="125" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Refresh 🔄">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="refreshButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zaO-Ob-auo"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="rgd-hx-Mkz" firstAttribute="centerY" secondItem="jY5-wM-Slr" secondAttribute="centerY" id="3A8-Y6-7XS"/>
+                            <constraint firstItem="rgd-hx-Mkz" firstAttribute="centerX" secondItem="jY5-wM-Slr" secondAttribute="centerX" id="bne-A1-UBQ"/>
                             <constraint firstItem="jY5-wM-Slr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hch-Ca-4ue"/>
                             <constraint firstItem="jY5-wM-Slr" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="kwZ-qz-Vip"/>
                             <constraint firstItem="jY5-wM-Slr" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="r8a-nV-5Gy"/>
@@ -34,6 +46,7 @@
                     <navigationItem key="navigationItem" id="F9g-ne-P7r"/>
                     <connections>
                         <outlet property="moviesTable" destination="jY5-wM-Slr" id="jeQ-f6-PAi"/>
+                        <outlet property="refreshButton" destination="rgd-hx-Mkz" id="AEN-vz-W18"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -413,6 +426,17 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wxj-Ma-8qI">
+                                <rect key="frame" x="134" y="417" width="125" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Refresh 🔄">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="refreshButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QYM-P6-Gnp"/>
+                                    <action selector="refreshButtonAction:" destination="E3a-BA-oPx" eventType="touchUpInside" id="yyh-iH-0ZP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fIN-Vt-r4e"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -420,12 +444,15 @@
                             <constraint firstItem="6YL-r9-LrI" firstAttribute="leading" secondItem="fIN-Vt-r4e" secondAttribute="leading" id="7x2-H9-cRx"/>
                             <constraint firstItem="6YL-r9-LrI" firstAttribute="trailing" secondItem="fIN-Vt-r4e" secondAttribute="trailing" id="Wgi-A3-0gg"/>
                             <constraint firstItem="6YL-r9-LrI" firstAttribute="bottom" secondItem="fIN-Vt-r4e" secondAttribute="bottom" id="dSy-b1-oo7"/>
+                            <constraint firstItem="Wxj-Ma-8qI" firstAttribute="centerY" secondItem="6YL-r9-LrI" secondAttribute="centerY" id="h3T-cd-JL3"/>
+                            <constraint firstItem="Wxj-Ma-8qI" firstAttribute="centerX" secondItem="6YL-r9-LrI" secondAttribute="centerX" id="sTZ-42-RCc"/>
                             <constraint firstItem="6YL-r9-LrI" firstAttribute="top" secondItem="fIN-Vt-r4e" secondAttribute="top" id="v96-F4-MHG"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Popular" image="heart" catalog="system" selectedImage="heart" id="WM6-3Y-oVa"/>
                     <connections>
                         <outlet property="moviesTable" destination="6YL-r9-LrI" id="44S-Hx-1sD"/>
+                        <outlet property="refreshButton" destination="Wxj-Ma-8qI" id="d5e-xa-6BC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xpC-8O-oy4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -486,12 +513,25 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="666"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bVd-um-TSz">
+                                <rect key="frame" x="134" y="417" width="125" height="38"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Refresh 🔄">
+                                    <fontDescription key="titleFontDescription" type="system" weight="semibold" pointSize="20"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="refreshButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VKU-KW-qfA"/>
+                                    <action selector="refreshButtonAction:" destination="QU1-YJ-lRF" eventType="touchUpInside" id="pbI-95-rN0"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="hkl-Wp-xEo"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Vz8-5t-tAh" firstAttribute="leading" secondItem="hkl-Wp-xEo" secondAttribute="leading" id="3i1-4f-RB9"/>
+                            <constraint firstItem="bVd-um-TSz" firstAttribute="centerY" secondItem="Vz8-5t-tAh" secondAttribute="centerY" id="8Kh-7h-4fd"/>
                             <constraint firstItem="Vz8-5t-tAh" firstAttribute="top" secondItem="hkl-Wp-xEo" secondAttribute="top" id="9cY-bt-Gzk"/>
+                            <constraint firstItem="bVd-um-TSz" firstAttribute="centerX" secondItem="Vz8-5t-tAh" secondAttribute="centerX" id="KSU-gc-B27"/>
                             <constraint firstItem="Vz8-5t-tAh" firstAttribute="bottom" secondItem="hkl-Wp-xEo" secondAttribute="bottom" id="dtR-9k-wVq"/>
                             <constraint firstItem="Vz8-5t-tAh" firstAttribute="trailing" secondItem="hkl-Wp-xEo" secondAttribute="trailing" id="x6m-Le-AJ4"/>
                         </constraints>
@@ -499,6 +539,7 @@
                     <tabBarItem key="tabBarItem" title="Now playing" image="popcorn" catalog="system" selectedImage="popcorn" id="IMx-VA-gUc"/>
                     <connections>
                         <outlet property="moviesTable" destination="Vz8-5t-tAh" id="EHh-ca-3bq"/>
+                        <outlet property="refreshButton" destination="bVd-um-TSz" id="4hi-9P-C6n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdu-Bw-Sds" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

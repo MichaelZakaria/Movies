@@ -10,6 +10,7 @@ import UIKit
 class MovieDetailsTableViewController: UITableViewController {
     
     var id: Int?
+    var name: String?
     var poster: UIImage?
     
     var viewModel: MovieDetailsViewModel?
@@ -23,13 +24,17 @@ class MovieDetailsTableViewController: UITableViewController {
     @IBOutlet weak var moviePoster: CustomImageView!
     @IBOutlet weak var movieOverview: UILabel!
     
+    var activityIndicator: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.contentInset = .init(top: 50, left: 0, bottom: -30, right: 0)
         
-        setNavigationBar()
+        self.title = name ?? ""
         
+        setActivityIndicator()
+        setNavigationBar()
         setbackGroundImage(image: poster!)
         
         setViewModel()
@@ -38,41 +43,68 @@ class MovieDetailsTableViewController: UITableViewController {
     func setViewModel() {
         viewModel = MovieDetailsViewModel()
         
-        viewModel?.fetchMovieDetails(id: id ?? 0)
-        
-        viewModel?.bindResultToViewController = { [weak self] in
-            guard let self = self else { return }
-            // set movie title label
-            self.title = viewModel?.movie?.title
-            // set movie poster image
-            moviePoster.image = poster
-            // set movie overview label
-            movieOverview.text = viewModel?.movie?.overview
-            // set movie runtime label
-            if viewModel?.movie?.runtime == 0 {
-                movieRuntime.text = "Unknown"
-                minuteLabel.isHidden = true
-                minuteLabel.text = .none
-            } else {
-                movieRuntime.text = viewModel?.movie?.runtime?.description
-            }
-            // set movie genres label
-            movieGenres.text = viewModel?.movie?.genres?.reduce("") { (partialResult, genre) in
-                if self.viewModel?.movie?.genres?.first?.id == genre.id {
-                    return "\(genre.name)"
-                } else {
-                    return "\(partialResult ?? "") - \(genre.name)"
-                }
-            }
-            // set movie score label
-            movieScore.text = viewModel?.movie?.voteAverage == 0.0 ? "Not scored yet" : String(format: "%.1f", viewModel?.movie?.voteAverage ?? 0.0)
-            // set movie language label
-            movieLanguage.text = viewModel?.movie?.language
-            // set movie release date label
-            movieReleaseDate.text = viewModel?.movie?.releaseDate
-            
-            tableView.reloadData()
+        if viewModel?.movie == nil {
+            activityIndicator.startAnimating()
+            viewModel?.fetchMovieDetails(id: id ?? 0)
+        } else {
+            viewModel?.bindResultToViewController(nil)
         }
+        
+        viewModel?.bindResultToViewController = { [weak self] error in
+            guard let self = self else { return }
+            
+            if let error = error {
+                showAlert(title: "⚠️", message: error.localizedDescription)
+                self.activityIndicator.stopAnimating()
+                return
+            }
+            
+            if viewModel?.movie != nil {
+                activityIndicator.stopAnimating()
+                
+                moviePoster.image = poster
+                movieOverview.text = viewModel?.movie?.overview
+                if viewModel?.movie?.runtime == 0 {
+                    movieRuntime.text = "Unknown"
+                    minuteLabel.isHidden = true
+                    minuteLabel.text = .none
+                } else {
+                    movieRuntime.text = viewModel?.movie?.runtime?.description
+                }
+                movieGenres.text = viewModel?.movie?.genres?.reduce("") { (partialResult, genre) in
+                    if self.viewModel?.movie?.genres?.first?.id == genre.id {
+                        return "\(genre.name)"
+                    } else {
+                        return "\(partialResult ?? "") - \(genre.name)"
+                    }
+                }
+                movieScore.text = viewModel?.movie?.voteAverage == 0.0 ? "Not scored yet" : String(format: "%.1f", viewModel?.movie?.voteAverage ?? 0.0)
+                movieLanguage.text = viewModel?.movie?.language
+                movieReleaseDate.text = viewModel?.movie?.releaseDate
+                
+                tableView.reloadData()
+            } else {
+                showAlert(title: "⚠️", message: "Somethong went wrong please try again")
+            }
+        }
+            
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { action in
+            self.navigationController?.popViewController(animated: true)
+        }))
+        self.present(alert, animated: true)
+    }
+    
+    func setActivityIndicator() {
+        // Initialize the activity indicator
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center // Center the indicator in the view
+        activityIndicator.hidesWhenStopped = true // Hide when not animating
+        // Add the activity indicator to the view
+        view.addSubview(activityIndicator)
     }
     
     func setNavigationBar() {
@@ -128,7 +160,7 @@ class MovieDetailsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 7
+        return viewModel?.movie != nil ? 7 : 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

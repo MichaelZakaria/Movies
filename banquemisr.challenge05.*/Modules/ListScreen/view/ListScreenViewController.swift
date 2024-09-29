@@ -122,6 +122,7 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         if let cachedImage = ImageCache.shared.object(forKey: (viewModel?.movies[indexPath.row].posterPath ?? "") as NSString) {
             cell.moviePoster.image = cachedImage
         } else {
+            cell.moviePoster.image = UIImage(named: "movie_3")
             viewModel?.loadMoviePoster(posterPath: viewModel?.movies[indexPath.row].posterPath ?? "", handler: { data in
                 if let posterImage = UIImage(data: data) {
                     ImageCache.shared.setObject(posterImage, forKey: (self.viewModel?.movies[indexPath.row].posterPath ?? "") as NSString)

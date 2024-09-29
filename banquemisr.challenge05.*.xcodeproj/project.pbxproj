@@ -25,7 +25,9 @@
 		F4DF6CDF2CA7692100DE5214 /* MovieDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CDE2CA7692100DE5214 /* MovieDetailsTableViewController.swift */; };
 		F4DF6CE12CA81DF400DE5214 /* MovieDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF6CE02CA81DF400DE5214 /* MovieDetailsViewModel.swift */; };
 		F4F9064F2CA8A25B00CEA7A0 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F9064E2CA8A25A00CEA7A0 /* ImageCache.swift */; };
+		F4F906512CA9696300CEA7A0 /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4F906502CA9696300CEA7A0 /* NetworkManagerTests.swift */; };
 		F4FB52D32CA6DD1D00AC43F8 /* ListScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FB52D22CA6DD1D00AC43F8 /* ListScreenViewController.swift */; };
+		F4FD72B72CA98F7C0076CE4C /* MockNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FD72B62CA98F7C0076CE4C /* MockNetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +70,9 @@
 		F4DF6CDE2CA7692100DE5214 /* MovieDetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsTableViewController.swift; sourceTree = "<group>"; };
 		F4DF6CE02CA81DF400DE5214 /* MovieDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsViewModel.swift; sourceTree = "<group>"; };
 		F4F9064E2CA8A25A00CEA7A0 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		F4F906502CA9696300CEA7A0 /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
 		F4FB52D22CA6DD1D00AC43F8 /* ListScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListScreenViewController.swift; sourceTree = "<group>"; };
+		F4FD72B62CA98F7C0076CE4C /* MockNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				F4927E0E2CA5FE81009D1E46 /* banquemisr_challenge05__Tests.swift */,
+				F4F906502CA9696300CEA7A0 /* NetworkManagerTests.swift */,
+				F4FD72B62CA98F7C0076CE4C /* MockNetworkManager.swift */,
 			);
 			path = "banquemisr.challenge05.*Tests";
 			sourceTree = "<group>";
@@ -396,6 +402,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F4FD72B72CA98F7C0076CE4C /* MockNetworkManager.swift in Sources */,
+				F4F906512CA9696300CEA7A0 /* NetworkManagerTests.swift in Sources */,
 				F4927E0F2CA5FE81009D1E46 /* banquemisr_challenge05__Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -626,6 +634,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHWQF7TL3L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
@@ -645,6 +654,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHWQF7TL3L;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
 				MARKETING_VERSION = 1.0;
@@ -663,6 +673,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHWQF7TL3L;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michael.banquemisr-challenge05--UITests";
@@ -680,6 +691,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QHWQF7TL3L;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.michael.banquemisr-challenge05--UITests";

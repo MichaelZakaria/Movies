@@ -52,19 +52,6 @@ class ListScreenViewModel {
     }
     
     func loadMoviePoster(posterPath: String, handler: @escaping (_ data: Data) -> Void) {
-        let url = URL(string: "https://image.tmdb.org/t/p/w500\(posterPath)")!
-
-        let imageTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            guard let data = data else {return}
-            //print("done")
-            DispatchQueue.main.async {
-                handler(data)
-            }
-        }
-        imageTask.resume()
+        network.fetchMoviePoster(posterPath: posterPath, handler: handler)
     }
 }

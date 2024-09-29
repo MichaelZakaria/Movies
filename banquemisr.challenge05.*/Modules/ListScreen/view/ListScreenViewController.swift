@@ -9,9 +9,12 @@ import UIKit
 
 class ListScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var moviesTable: UITableView!
     
     var viewModel: ListScreenViewModel?
+    
+    var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,37 +22,75 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         self.moviesTable.delegate = self
         self.moviesTable.dataSource = self
         
+        setActivityIndicator()
+        
         let movieCellNib = UINib(nibName: "MovieTableViewCell", bundle: nil)
         moviesTable.register(movieCellNib, forCellReuseIdentifier: "movieCell")
         
         setViewModel()
     }
+    @IBAction func refreshButtonAction(_ sender: Any) {
+        loadMovies()
+    }
     
     func setViewModel() {
         viewModel = ListScreenViewModel()
-        viewModel?.bindResultToViewController = {
-            self.moviesTable.reloadData()
+        viewModel?.bindResultToViewController = { error in
+            self.activityIndicator.stopAnimating()
+            self.refreshButton.isHidden = true
+            if let error = error {
+                self.showAlert(title: "⚠️", message: error.localizedDescription)
+            } else {
+                self.moviesTable.reloadData()
+            }
         }
     }
     
+    func setActivityIndicator() {
+        // Initialize the activity indicator
+        activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.center = view.center // Center the indicator in the view
+        activityIndicator.hidesWhenStopped = true // Hide when not animating
+        // Add the activity indicator to the view
+        view.addSubview(activityIndicator)
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "retry", style: .default, handler: { action in
+            self.loadMovies()
+        }))
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: { action in
+            self.refreshButton.isHidden = false
+        }))
+        self.present(alert, animated: true)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
+        loadMovies()
+    }
+    
+    func loadMovies() {
         switch self.tabBarItem.tag {
         case 0:
             if viewModel?.playnig.count != 0 {
                 viewModel?.movies = viewModel?.playnig ?? []
             } else {
+                activityIndicator.startAnimating()
                 viewModel?.loadMovies(endpoint: .nowPlaying)
             }
         case 1:
             if viewModel?.popular.count != 0 {
                 viewModel?.movies = viewModel?.popular ?? []
             } else {
+                activityIndicator.startAnimating()
                 viewModel?.loadMovies(endpoint: .popular)
             }
         case 2:
             if viewModel?.upcoming.count != 0 {
                 viewModel?.movies = viewModel?.upcoming ?? []
             } else {
+                activityIndicator.startAnimating()
                 viewModel?.loadMovies(endpoint: .upcoming)
             }
         default:
@@ -67,9 +108,20 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         cell.movieName.text = viewModel?.movies[indexPath.row].title
         cell.releaseDate.text = viewModel?.movies[indexPath.row].releaseDate
-        viewModel?.loadMoviePoster(posterPath: viewModel?.movies[indexPath.row].posterPath ?? "", handler: { data in
-            cell.moviePoster.image = UIImage(data: data)
-        })
+        
+        if let cachedImage = ImageCache.shared.object(forKey: (viewModel?.movies[indexPath.row].posterPath ?? "") as NSString) {
+            cell.moviePoster.image = cachedImage
+        } else {
+            viewModel?.loadMoviePoster(posterPath: viewModel?.movies[indexPath.row].posterPath ?? "", handler: { data in
+                if let posterImage = UIImage(data: data) {
+                    
+                    ImageCache.shared.setObject(posterImage, forKey: (self.viewModel?.movies[indexPath.row].posterPath ?? "") as NSString)
+                    
+                    cell.moviePoster.image = posterImage
+                }
+            })
+        }
+        
         return cell
     }
     
@@ -80,6 +132,7 @@ class ListScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movieDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "movieDetails") as! MovieDetailsTableViewController
         movieDetailsVC.id = viewModel?.movies[indexPath.row].id
+        movieDetailsVC.name = viewModel?.movies[indexPath.row].title
         movieDetailsVC.poster = (moviesTable.cellForRow(at: indexPath) as! MovieTableViewCell).moviePoster.image
         navigationController?.pushViewController(movieDetailsVC, animated: true)
     }

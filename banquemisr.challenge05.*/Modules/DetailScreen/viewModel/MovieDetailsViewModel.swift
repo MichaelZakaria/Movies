@@ -11,12 +11,11 @@ class MovieDetailsViewModel{
     
     let network: NetworkManagerProtocol
     
-    var bindResultToViewController: (() -> Void) = {}
+    var bindResultToViewController: ((_ error: Error?) -> Void) = {error in }
     
     var movie: Movie? {
         didSet {
-            //loadMovieDetails()
-            bindResultToViewController()
+            bindResultToViewController(nil)
         }
     }
     
@@ -28,32 +27,16 @@ class MovieDetailsViewModel{
         network.getData(endPoint: .movieDetail(id: id), type: Movie.self) { result in
             switch result {
             case .success(let movie):
+                print("ok")
                 DispatchQueue.main.async {
                     self.movie = movie
                 }
             case .failure(let error):
                 print(error.localizedDescription)
+                DispatchQueue.main.async {
+                    self.bindResultToViewController(error)
+                }
             }
         }
-    }
-    
-    func loadBackdrop(backdropPath: String, handler: @escaping (_ data: Data) -> Void) {
-        let url = URL(string: "https://image.tmdb.org/t/p/w500\(backdropPath)")!
-
-        let imageTask = URLSession.shared.dataTask(with: url) { (data, _, error) in
-            if let error = error {
-                print(error)
-                return
-            }
-            
-            guard let data = data else {return}
-            
-            print("done")
-            
-            DispatchQueue.main.async {
-                handler(data)
-            }
-        }
-        imageTask.resume()
     }
 }

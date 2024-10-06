@@ -8,7 +8,7 @@
 import Foundation
 
 protocol NetworkManagerProtocol {
-    func fetchMovies<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void)
+    func fetchData<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void)
     func fetchMoviePoster(posterPath: String, handler: @escaping (_ data: Data) -> Void)
 }
 
@@ -17,6 +17,7 @@ enum EndPoints {
     case popular
     case upcoming
     case movieDetail(id:Int)
+    case movieVideos(id:Int)
     var rawValue: String {
         switch self {
         case .nowPlaying:
@@ -27,12 +28,14 @@ enum EndPoints {
             return "upcoming"
         case .movieDetail(id: let id):
             return "\(id)"
+        case .movieVideos(id: let id):
+            return "\(id)/videos"
         }
     }
 }
 
 class NetworkManager: NetworkManagerProtocol{
-    func fetchMovies<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void) {
+    func fetchData<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void) {
         // 1
         let url = URL(string: "https://api.themoviedb.org/3/movie/\(endPoint.rawValue)")
         // 2

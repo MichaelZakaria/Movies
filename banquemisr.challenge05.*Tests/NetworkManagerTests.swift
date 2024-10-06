@@ -28,7 +28,7 @@ class NetworkManagerTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Fetch movies successfully")
         mockNetworkManager.shouldReturnErrorForMovies = false
 
-        sut.fetchMovies(endPoint: .nowPlaying, type: MoviesResponse.self) { result in
+        sut.fetchData(endPoint: .nowPlaying, type: MoviesResponse.self) { result in
             switch result {
             case .success(let moviesResponse):
                 XCTAssertFalse(moviesResponse.results.isEmpty, "Expected movies to be loaded")
@@ -45,7 +45,7 @@ class NetworkManagerTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Fetch movies failed")
         mockNetworkManager.shouldReturnErrorForMovies = true
 
-        sut.fetchMovies(endPoint: .popular, type: MoviesResponse.self) { result in
+        sut.fetchData(endPoint: .popular, type: MoviesResponse.self) { result in
             switch result {
             case .success:
                 XCTFail("Expected failure but got success")

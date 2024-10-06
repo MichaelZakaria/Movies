@@ -24,7 +24,7 @@ class ListScreenViewModel {
     }
     
     func loadMovies(endpoint: EndPoints) {
-        network.fetchMovies(endPoint: endpoint, type: MoviesResponse.self) { result in
+        network.fetchData(endPoint: endpoint, type: MoviesResponse.self) { result in
             switch result {
             case .success(let moviesResponse):
                 DispatchQueue.main.async {

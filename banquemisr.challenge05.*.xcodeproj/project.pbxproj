@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F45C38662CAD8CA000423C51 /* video.swift in Sources */ = {isa = PBXBuildFile; fileRef = F45C38652CAD8CA000423C51 /* video.swift */; };
 		F4927DF52CA5FE80009D1E46 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4927DF42CA5FE80009D1E46 /* AppDelegate.swift */; };
 		F4927DF72CA5FE80009D1E46 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4927DF62CA5FE80009D1E46 /* SceneDelegate.swift */; };
 		F4927DFC2CA5FE80009D1E46 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = F4927DFB2CA5FE80009D1E46 /* Base */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F45C38652CAD8CA000423C51 /* video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = video.swift; sourceTree = "<group>"; };
 		F4927DF12CA5FE80009D1E46 /* banquemisr.challenge05.*.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "banquemisr.challenge05.*.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4927DF42CA5FE80009D1E46 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4927DF62CA5FE80009D1E46 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			children = (
 				F4927E2B2CA602C2009D1E46 /* Movie.swift */,
 				F4F9064E2CA8A25A00CEA7A0 /* ImageCache.swift */,
+				F45C38652CAD8CA000423C51 /* video.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -393,6 +396,7 @@
 				F4927E292CA5FEFC009D1E46 /* NetworkManager.swift in Sources */,
 				F4927DF52CA5FE80009D1E46 /* AppDelegate.swift in Sources */,
 				F4DF6CDF2CA7692100DE5214 /* MovieDetailsTableViewController.swift in Sources */,
+				F45C38662CAD8CA000423C51 /* video.swift in Sources */,
 				F4DF6CD02CA6E71100DE5214 /* MovieTableViewCell.swift in Sources */,
 				F4927DF72CA5FE80009D1E46 /* SceneDelegate.swift in Sources */,
 			);

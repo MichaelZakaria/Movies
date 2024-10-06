@@ -12,7 +12,7 @@ class MockNetworkManager: NetworkManagerProtocol {
     var shouldReturnErrorForMovies = false
     var shouldReturnErrorForPoster = false
     
-    func fetchMovies<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void) {
+    func fetchData<T: Codable>(endPoint: EndPoints, type: T.Type, handler: @escaping (Result<T, Error>) -> Void) {
         if shouldReturnErrorForMovies {
             handler(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Mock error occurred"])))
         } else {

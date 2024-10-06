@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class MovieDetailsTableViewController: UITableViewController {
     
@@ -15,6 +16,9 @@ class MovieDetailsTableViewController: UITableViewController {
     
     var viewModel: MovieDetailsViewModel?
     
+    @IBOutlet weak var noTrailerLabel: UILabel!
+    @IBOutlet weak var trailerIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var movieTrailerView: WKWebView!
     @IBOutlet weak var movieTitle: UILabel!
     @IBOutlet weak var minuteLabel: UILabel!
     @IBOutlet weak var movieLanguage: UILabel!
@@ -59,6 +63,15 @@ class MovieDetailsTableViewController: UITableViewController {
                 activityIndicator.stopAnimating()
                 setMovieDetailsUI(movie: movie)
                 tableView.reloadData()
+                viewModel?.fetchMovieVideos(id: id ?? 0, handler: { trailerUrl in
+                    guard let trailerUrl = trailerUrl else {
+                        self.trailerIndicator.stopAnimating()
+                        self.noTrailerLabel.isHidden = false
+                        return
+                    }
+                    self.movieTrailerView.load(URLRequest(url: trailerUrl))
+                    self.trailerIndicator.stopAnimating()
+                })
             } else {
                 showAlert(title: "⚠️", message: "Somethong went wrong please try again")
             }
@@ -165,7 +178,7 @@ class MovieDetailsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return viewModel?.movie != nil ? 8 : 0
+        return viewModel?.movie != nil ? 9 : 0
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
